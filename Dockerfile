@@ -1,4 +1,5 @@
-FROM bde2020/hadoop-base:2.0.0-hadoop2.7.4-java8
+#FROM bde2020/hadoop-base:2.0.0-hadoop2.7.4-java8
+FROM bde2020/hadoop-base:2.0.0-hadoop3.1.2-java8
 
 MAINTAINER Yiannis Mouchakis <gmouchakis@iit.demokritos.gr>
 MAINTAINER Ivan Ermilov <ivan.s.ermilov@gmail.com>
@@ -8,7 +9,10 @@ ARG HIVE_VERSION
 # Set HIVE_VERSION from arg if provided at build, env if provided at run, or default
 # https://docs.docker.com/engine/reference/builder/#using-arg-variables
 # https://docs.docker.com/engine/reference/builder/#environment-replacement
-ENV HIVE_VERSION=${HIVE_VERSION:-2.3.2}
+#ENV HIVE_VERSION=${HIVE_VERSION:-2.3.2}
+ENV HIVE_VERSION=${HIVE_VERSION:-3.1.2}
+
+
 
 ENV HIVE_HOME /opt/hive
 ENV PATH $HIVE_HOME/bin:$PATH
@@ -37,9 +41,9 @@ RUN apt-get install -y wget procps && \
 RUN cd $HIVE_HOME/lib && \
 	curl -O http://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-core/2.9.9/jackson-core-2.9.9.jar && \
 	curl -O http://repo1.maven.org/maven2/com/microsoft/azure/azure-storage/8.6.0/azure-storage-8.6.0.jar && \
-    curl -O http://repo1.maven.org/maven2/org/apache/hadoop/hadoop-azure/3.2.1/hadoop-azure-3.2.1.jar && \
+    curl -O http://repo1.maven.org/maven2/org/apache/hadoop/hadoop-azure/3.1.2/hadoop-azure-3.1.2.jar && \
 	curl -O http://repo1.maven.org/maven2/com/microsoft/azure/azure-data-lake-store-sdk/2.3.8/azure-data-lake-store-sdk-2.3.8.jar && \
-    curl -O http://repo1.maven.org/maven2/org/apache/hadoop/hadoop-azure-datalake/3.2.1/hadoop-azure-datalake-3.2.1.jar 
+    curl -O http://repo1.maven.org/maven2/org/apache/hadoop/hadoop-azure-datalake/3.1.2/hadoop-azure-datalake-3.1.2.jar 
     
 
  
