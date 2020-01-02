@@ -38,12 +38,15 @@ RUN apt-get install -y wget procps && \
 	rm -rf /var/lib/apt/lists/*
 
 
-#RUN cd $HIVE_HOME/lib && \
-#	curl -O http://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-core/2.9.9/jackson-core-2.9.9.jar && \
-#	curl -O http://repo1.maven.org/maven2/com/microsoft/azure/azure-storage/8.6.0/azure-storage-8.6.0.jar && \
-#   curl -O http://repo1.maven.org/maven2/org/apache/hadoop/hadoop-azure/3.1.1/hadoop-azure-3.1.1.jar && \
-#	curl -O http://repo1.maven.org/maven2/com/microsoft/azure/azure-data-lake-store-sdk/2.3.8/azure-data-lake-store-sdk-2.3.8.jar && \
-#   curl -O http://repo1.maven.org/maven2/org/apache/hadoop/hadoop-azure-datalake/3.1.1/hadoop-azure-datalake-3.1.1.jar 
+RUN cd $HIVE_HOME/lib && \
+	curl -O http://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-core/2.9.9/jackson-core-2.9.9.jar && \
+	curl -O http://repo1.maven.org/maven2/com/microsoft/azure/azure-storage/8.6.0/azure-storage-8.6.0.jar && \
+   curl -O http://repo1.maven.org/maven2/org/apache/hadoop/hadoop-azure/3.1.1/hadoop-azure-3.1.1.jar && \
+	curl -O http://repo1.maven.org/maven2/com/microsoft/azure/azure-data-lake-store-sdk/2.3.8/azure-data-lake-store-sdk-2.3.8.jar && \
+   curl -O http://repo1.maven.org/maven2/org/apache/hadoop/hadoop-azure-datalake/3.1.1/hadoop-azure-datalake-3.1.1.jar && \
+   curl -O  https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-client-api/3.2.1/hadoop-client-api-3.2.1.jar && \
+   curl -O https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-client/3.2.1/hadoop-client-3.2.1-sources.jar 
+   
     
  
 
@@ -64,6 +67,7 @@ RUN chmod +x /usr/local/bin/startup.sh
 
 COPY entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/entrypoint.sh
+RUN export HADOOP_CLASSPATH=/opt/hive/lib/*:$HADOOP_CLASSPATH
 
 EXPOSE 10000
 EXPOSE 10002
