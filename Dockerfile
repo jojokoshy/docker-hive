@@ -37,7 +37,7 @@ RUN apt-get install -y wget procps && \
 	apt-get clean && \
 	rm -rf /var/lib/apt/lists/*
 
-
+# Added Azure Jars files to abfs processing. The last 2 hadoop-client-api were added for Streaming error
 RUN cd $HIVE_HOME/lib && \
 	curl -O http://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-core/2.9.9/jackson-core-2.9.9.jar && \
 	curl -O http://repo1.maven.org/maven2/com/microsoft/azure/azure-storage/8.6.0/azure-storage-8.6.0.jar && \
@@ -67,6 +67,8 @@ RUN chmod +x /usr/local/bin/startup.sh
 
 COPY entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/entrypoint.sh
+
+# Added extra class path for finding Azure Jar files
 RUN export HADOOP_CLASSPATH=/opt/hive/lib/*:$HADOOP_CLASSPATH
 
 EXPOSE 10000
