@@ -46,7 +46,7 @@ RUN cd $HIVE_HOME/lib && \
    curl -O http://repo1.maven.org/maven2/org/apache/hadoop/hadoop-azure-datalake/3.1.1/hadoop-azure-datalake-3.1.1.jar && \
    curl -O  https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-client-api/3.2.1/hadoop-client-api-3.2.1.jar && \
    curl -O https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-client/3.2.1/hadoop-client-3.2.1-sources.jar && \
-   curl -O https://repo1.maven.org/maven2/commons-io/commons-io/2.4/commons-io-2.4-javadoc.jar
+   curl -O https://repo1.maven.org/maven2/commons-io/commons-io/2.6/commons-io-2.6-javadoc.jar
    
     
  
@@ -70,7 +70,7 @@ COPY entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
 # Added extra class path for finding Azure Jar files
-#RUN export HADOOP_CLASSPATH=/opt/hive/lib/*:$HADOOP_CLASSPATH
+RUN export HADOOP_CLASSPATH=/opt/hive/lib/*:$HADOOP_CLASSPATH
 
 EXPOSE 10000
 EXPOSE 10002
